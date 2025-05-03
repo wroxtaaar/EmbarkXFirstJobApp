@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor
 public class Job {
+
     private Long id;
     private String title;
     private String description;
