@@ -1,0 +1,54 @@
+package com.embarkx.embarkxfirstJobApp.company.impl;
+
+import com.embarkx.embarkxfirstJobApp.company.Company;
+import com.embarkx.embarkxfirstJobApp.company.CompanyRepository;
+import com.embarkx.embarkxfirstJobApp.company.CompanyService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@AllArgsConstructor
+public class CompanyServiceImpl implements CompanyService {
+
+    private final CompanyRepository companyRepository;
+
+    @Override
+    public List<Company> getAllCompanies() {
+        return companyRepository.findAll();
+    }
+
+
+    @Override
+    public boolean updateCompany(Long id, Company updatedCompany) {
+
+        Optional<Company> companyOptional = companyRepository.findById(id);
+
+        if (companyOptional.isPresent()) {
+            Company companyToUpdate = companyOptional.get();
+            companyToUpdate.setName(updatedCompany.getName());
+            companyToUpdate.setDescription(updatedCompany.getDescription());
+            companyRepository.save(companyToUpdate);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void createCompany(Company company) {
+        companyRepository.save(company);
+    }
+
+    @Override
+    public boolean deleteCompanyById(Long id) {
+        Optional<Company> companyOptional = companyRepository.findById(id);
+        if (companyOptional.isPresent()) {
+            companyRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+}

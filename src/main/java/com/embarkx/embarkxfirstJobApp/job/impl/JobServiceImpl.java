@@ -3,19 +3,17 @@ package com.embarkx.embarkxfirstJobApp.job.impl;
 import com.embarkx.embarkxfirstJobApp.job.Job;
 import com.embarkx.embarkxfirstJobApp.job.JobRepository;
 import com.embarkx.embarkxfirstJobApp.job.JobService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class JobServiceImpl implements JobService {
 
     JobRepository jobRepository;
-
-    public JobServiceImpl(JobRepository jobRepository) {
-        this.jobRepository = jobRepository;
-    }
 
     @Override
     public List<Job> findAll() {
@@ -38,8 +36,7 @@ public class JobServiceImpl implements JobService {
     public boolean deleteJobById(Long id) {
         Optional<Job> jobOptional = jobRepository.findById(id);
         if (jobOptional.isPresent()) {
-            jobRepository.deleteById(id)
-            ;
+            jobRepository.deleteById(id);
             return true;
         }
         return false;

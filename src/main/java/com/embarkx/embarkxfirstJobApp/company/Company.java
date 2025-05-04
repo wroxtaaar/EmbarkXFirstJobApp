@@ -1,25 +1,27 @@
-package com.embarkx.embarkxfirstJobApp.job;
+package com.embarkx.embarkxfirstJobApp.company;
 
-import com.embarkx.embarkxfirstJobApp.company.Company;
+import com.embarkx.embarkxfirstJobApp.job.Job;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data @AllArgsConstructor @NoArgsConstructor
 @Entity
-public class Job {
+public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private String name;
     private String description;
-    private String minSalary;
-    private String maxSalary;
-    private String location;
 
-    @ManyToOne
-    private Company company;
+    @OneToMany
+    private List<Job> jobs;
+
+//    private List<Review> reviews;
+
 
 }
