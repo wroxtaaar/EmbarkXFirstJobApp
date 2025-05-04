@@ -20,6 +20,16 @@ private final CompanyService companyService;
          return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
      }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> getCompanyById(@PathVariable long id) {
+        Company company = companyService.getCompanyById(id);
+        if(company == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(company, HttpStatus.OK);
+    }
+
+
     @PostMapping
     public ResponseEntity<String> createCompany(@RequestBody Company company) {
         companyService.createCompany(company);
@@ -30,9 +40,9 @@ private final CompanyService companyService;
     @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody Company company) {
 
-        boolean updated = companyService.updateCompany(id, company);
+        boolean isUpdated = companyService.updateCompany(id, company);
 
-        if(!updated) {
+        if(!isUpdated) {
             return new ResponseEntity<>("Company not found!", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>("Company updated successfully!", HttpStatus.OK);
@@ -41,8 +51,8 @@ private final CompanyService companyService;
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable Long id) {
-        boolean deleted = companyService.deleteCompanyById(id);
-        if(deleted) {
+        boolean isDeleted = companyService.deleteCompanyById(id);
+        if(isDeleted) {
             return new ResponseEntity<>("Company deleted successfully!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Company not found!", HttpStatus.NOT_FOUND);

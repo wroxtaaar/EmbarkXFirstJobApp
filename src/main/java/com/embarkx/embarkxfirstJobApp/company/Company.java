@@ -1,6 +1,8 @@
 package com.embarkx.embarkxfirstJobApp.company;
 
 import com.embarkx.embarkxfirstJobApp.job.Job;
+import com.embarkx.embarkxfirstJobApp.review.Review;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +20,12 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany
-    private List<Job> jobs;
+    @JsonIgnore
+    @OneToMany(mappedBy = "company") //(mappedBy = "company") removed the x table that contained only ids
+    private List<Job> jobs;          //company_id and job_id, now both are connected without a mediator
 
-//    private List<Review> reviews;
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
 
 }

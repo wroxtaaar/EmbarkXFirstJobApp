@@ -20,6 +20,12 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll();
     }
 
+    @Override
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).orElse(null);
+
+    }
+
 
     @Override
     public boolean updateCompany(Long id, Company updatedCompany) {
@@ -43,11 +49,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean deleteCompanyById(Long id) {
-        Optional<Company> companyOptional = companyRepository.findById(id);
-        if (companyOptional.isPresent()) {
+        if(companyRepository.existsById(id)) {
             companyRepository.deleteById(id);
             return true;
-        }
+        }        // If the company with the given ID does not exist, return false
         return false;
     }
 

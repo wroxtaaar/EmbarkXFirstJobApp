@@ -1,24 +1,23 @@
-package com.embarkx.embarkxfirstJobApp.job;
+package com.embarkx.embarkxfirstJobApp.review;
 
 import com.embarkx.embarkxfirstJobApp.company.Company;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @NoArgsConstructor
 @Entity
-public class Job {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
-    private String minSalary;
-    private String maxSalary;
-    private String location;
+    private double rating;
 
+    @JsonIgnore
     @ManyToOne
     private Company company;
 

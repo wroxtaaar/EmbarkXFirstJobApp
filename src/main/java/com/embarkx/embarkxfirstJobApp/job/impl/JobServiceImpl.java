@@ -18,14 +18,12 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<Job> findAll() {
         return jobRepository.findAll();
-
     }
 
     @Override
     public Job getJobById(Long id) {
         return jobRepository.findById(id).orElse(null);
     }
-
 
     @Override
     public void createJob(Job job) {
@@ -34,11 +32,10 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean deleteJobById(Long id) {
-        Optional<Job> jobOptional = jobRepository.findById(id);
-        if (jobOptional.isPresent()) {
+        if(jobRepository.existsById(id)) {
             jobRepository.deleteById(id);
             return true;
-        }
+        }        // If the company with the given ID does not exist, return false
         return false;
     }
 
