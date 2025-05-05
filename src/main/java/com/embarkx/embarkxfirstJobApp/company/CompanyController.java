@@ -1,6 +1,5 @@
 package com.embarkx.embarkxfirstJobApp.company;
 
-import com.embarkx.embarkxfirstJobApp.job.Job;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
