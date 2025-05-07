@@ -35,12 +35,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review getReviewById(Long reviewId) {
-        return reviewRepository.findById(reviewId).orElse(null);
-
-    }
-
-    @Override
     public Review getReview(Long companyId, Long reviewId) {
         List<Review> reviews = reviewRepository.findByCompanyId(companyId);
             return reviews.stream()
