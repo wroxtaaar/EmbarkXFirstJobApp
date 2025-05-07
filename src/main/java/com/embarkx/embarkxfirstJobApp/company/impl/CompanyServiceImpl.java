@@ -36,6 +36,7 @@ public class CompanyServiceImpl implements CompanyService {
             Company companyToUpdate = companyOptional.get();
             companyToUpdate.setName(updatedCompany.getName());
             companyToUpdate.setDescription(updatedCompany.getDescription());
+            companyToUpdate.setJobs(updatedCompany.getJobs());
             companyRepository.save(companyToUpdate);
             return true;
         }
